@@ -33,9 +33,9 @@ def save_img(img_url,file_name,file_path='\img'):
        #下载图片，并保存到文件夹中
         urllib.urlretrieve(img_url,filename=filename)
     except IOError as e:
-        print('文件操作失败',e)
+        print('文件操作失败', e)
     except Exception as e:
-        print('错误 ：',e)
+        print('错误 ：', e)
 
 
 #目標網址
@@ -55,8 +55,11 @@ if r.status_code == 200: #200為成功的狀態碼
     pushBum = []
     url = []
     for item in a_tag:
-        print(item.find('a'))
-        print(item.find('span', class_='hl f3'))
+        if (item.find('a') is not None) and (item.find('span', class_='hl') is not None):
+            # 只顯示30推以上
+            if (item.find('span', class_='hl').string == '爆') or (int(item.find('span', class_='hl').string) > 30):
+                print(item.find('a').string)
+                print(item.find('span', class_='hl').string)
         # if item.find('a') != None:
         #     print(item.find('span', class_='hl f3').string)
         #     TitleList.append(item.find('a').string)
