@@ -4,6 +4,7 @@ import requests
 import xlwt
 import os
 import urllib
+import ssl
 
 
 
@@ -52,8 +53,8 @@ def save_img(img_url,file_name,file_path='\img'):
 
 
 #目標網址
-
-
+#取消SSL驗證
+ssl._create_default_https_context = ssl._create_unverified_context
 r = requests.get(targetURL)
 
 if r.status_code == 200: #200為成功的狀態碼
